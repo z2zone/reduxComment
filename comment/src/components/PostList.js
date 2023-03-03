@@ -5,7 +5,6 @@ import { fetchPost } from '../actions';
 const PostList = (props) => {
     useEffect(()=>{
         props.fetchPost();
-        console.log(props.fetchPost());
     }, []);
 
     return(
@@ -15,4 +14,8 @@ const PostList = (props) => {
     );
 }
 
-export default connect(null,{fetchPost})(PostList);
+const mapStateToProps = (state) => {
+    return { posts: state.posts };
+}
+
+export default connect(mapStateToProps,{fetchPost})(PostList);
