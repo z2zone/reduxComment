@@ -8,10 +8,7 @@ const UserHeader = (props) => {
 		props.fetchUser(props.userId);
 	}, []);
 
-	const foundUser = props.users.find((user) => {
-		return user.id === props.userId;
-	});
-
+	const foundUser = props.user;
 	if (!foundUser) {
 		return null;
 	}
@@ -19,8 +16,8 @@ const UserHeader = (props) => {
 	return <div className="header">{foundUser.name}</div>;
 };
 
-const mapStateToProps = (state) => {
-	return { users: state.users };
+const mapStateToProps = (state, ownProps) => {
+	return { user: state.users.find((user) => user.id === ownProps.userId) };
 };
 
 export default connect(mapStateToProps, { fetchUser })(UserHeader);
